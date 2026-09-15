@@ -64,6 +64,97 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* Soft filament that occasionally travels the page edge */
+.ambient-thread {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 360;
+  overflow: hidden;
+}
+
+.ambient-thread__filament {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: clamp(90px, 14vw, 170px);
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(143, 208, 179, 0.15) 18%,
+    rgba(35, 152, 108, 0.85) 50%,
+    rgba(143, 208, 179, 0.2) 82%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 10px rgba(35, 152, 108, 0.35),
+    0 0 22px rgba(143, 208, 179, 0.22);
+  offset-path: inset(14px round 26px);
+  offset-rotate: auto;
+  offset-anchor: center;
+  animation: threadOrbit 36s linear infinite;
+  opacity: 0;
+  will-change: offset-distance, opacity;
+}
+
+.ambient-thread__filament--soft {
+  width: clamp(140px, 22vw, 240px);
+  height: 1px;
+  opacity: 0;
+  filter: blur(0.4px);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(143, 208, 179, 0.08) 20%,
+    rgba(35, 152, 108, 0.35) 50%,
+    rgba(143, 208, 179, 0.1) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 18px rgba(143, 208, 179, 0.2);
+  animation: threadOrbitSoft 48s linear infinite;
+  animation-delay: 18s;
+}
+
+@keyframes threadOrbit {
+  0%,
+  10% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  14% {
+    opacity: 0.9;
+  }
+  62% {
+    opacity: 0.75;
+  }
+  72%,
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes threadOrbitSoft {
+  0%,
+  16% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+  22% {
+    opacity: 0.45;
+  }
+  58% {
+    opacity: 0.35;
+  }
+  68%,
+  100% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -672,6 +763,17 @@ p {
 .float-card--role {
   top: 8%;
   left: 0;
+  animation:
+    floatY 4.5s ease-in-out infinite,
+    roleGlow 5.5s ease-in-out infinite;
+}
+
+.float-card--role .float-card__icon {
+  animation: roleIconGlow 5.5s ease-in-out infinite;
+}
+
+.float-card--role strong {
+  animation: roleTextGlow 5.5s ease-in-out infinite;
 }
 
 .float-card--place {
@@ -742,6 +844,42 @@ p {
   }
   50% {
     transform: translateY(-8px);
+  }
+}
+
+@keyframes roleGlow {
+  0%,
+  100% {
+    border-color: var(--line);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: var(--shadow);
+  }
+  50% {
+    border-color: var(--green-300);
+    background: rgba(231, 245, 238, 0.97);
+    box-shadow: 0 14px 32px rgba(35, 152, 108, 0.16);
+  }
+}
+
+@keyframes roleIconGlow {
+  0%,
+  100% {
+    background: var(--green-100);
+    color: var(--green-800);
+  }
+  50% {
+    background: var(--green-300);
+    color: var(--green-950);
+  }
+}
+
+@keyframes roleTextGlow {
+  0%,
+  100% {
+    color: var(--ink);
+  }
+  50% {
+    color: var(--green-700);
   }
 }
 
@@ -2302,7 +2440,8 @@ p {
   .hero__signal--live i,
   .hero__scroll,
   .hero__scroll span,
-  .proj-stage__img.is-live {
+  .proj-stage__img.is-live,
+  .ambient-thread__filament {
     animation: none !important;
     transition: none !important;
   }
@@ -2333,7 +2472,8 @@ p {
 
   .domain-item::after,
   .btn::after,
-  body::before {
+  body::before,
+  .ambient-thread {
     display: none;
   }
 
@@ -2449,8 +2589,20 @@ p {
     order: -1;
   }
 
-  .float-card--role {
-    left: 2%;
+  .hero__visual .float-card.float-card--role {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    align-self: center;
+    margin-top: -1.5rem;
+    margin-right: 0;
+    margin-bottom: 0.15rem;
+    z-index: 3;
+    animation:
+      floatY 4.5s ease-in-out infinite,
+      roleGlow 5.5s ease-in-out infinite;
   }
 
   .hero__bg {
