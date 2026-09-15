@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Imesha Basnayake — Software Engineer portfolio. Full-stack developer specializing in .NET, Angular, and React." />
+  <meta name="author" content="Imesha Basnayake" />
+  <title>Imesha Basnayake | Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="top" tabindex="-1"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress" aria-hidden="true"><div class="progress__bar" id="progress-bar"></div></div>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__brand" href="#top">
+        <span class="nav__logo">IB</span>
+        <span class="nav__name">Imesha<span>Basnayake</span></span>
+      </a>
+
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+
+      <ul class="nav__menu" id="nav-menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Technical Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+      </ul>
+
+      <div class="nav__end">
+        <a class="btn btn--nav" href="#contact">Let's Talk</a>
+        <a class="nav__avatar" href="#about" aria-label="About Imesha">
+          <img src="assets/profile.jpeg" alt="" width="40" height="40" />
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="about" aria-labelledby="hero-heading">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="hero__overlay" aria-hidden="true"></div>
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow reveal"><span class="dot"></span> Available for opportunities</p>
+          <h1 id="hero-heading" class="hero__title reveal">
+            <span class="hero__hi">Hi, I'm</span>
+            <span class="hero__name">Imesha Basnayake</span>
+          </h1>
+          <p class="hero__role reveal">Software Engineer</p>
+          <p class="hero__text reveal">
+            Software Engineer with 2+ years of experience building efficient and scalable software using .NET, Angular, and React. I enjoy developing full-stack applications, solving real-world problems, and exploring AI-driven solutions.
+          </p>
+          <div class="hero__actions reveal">
+            <a class="btn btn--primary" href="#projects">View Projects →</a>
+            <a class="btn btn--ghost" href="assets/Imesha%20Basnayake_CV.pdf" download="Imesha_Basnayake_CV.pdf">Download CV</a>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal">
+          <div class="hero__orbit" aria-hidden="true"></div>
+          <div class="hero__photo">
+            <img src="assets/profile.jpeg" alt="Portrait of Imesha Basnayake" width="440" height="440" loading="eager" />
+          </div>
+          <div class="float-card float-card--role">
+            <span class="float-card__icon">●</span>
+            <div>
+              <strong>Full-Stack Engineer</strong>
+              <span>.NET · Angular · React</span>
+            </div>
+          </div>
+          <div class="hero__stats" aria-label="Quick stats">
+            <div><strong data-count="2" data-suffix="+">0</strong><span>Years Exp</span></div>
+            <div><strong data-count="8" data-suffix="+">0</strong><span>Projects</span></div>
+            <div><strong data-count="2" data-suffix="">0</strong><span>Companies</span></div>
+          </div>
+        </div>
+      </div>
+      <a class="hero__scroll" href="#domains" aria-label="Scroll to next section">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- DOMAINS -->
+    <section class="domain-strip" id="domains" aria-labelledby="domains-heading">
+      <div class="container">
+        <header class="section-head section-head--compact reveal">
+          <h2 id="domains-heading" class="section-title">Fields I've Worked In</h2>
+        </header>
+        <div class="domain-grid">
+          <article class="domain-item reveal" style="--delay: 0ms">
+            <span class="domain-item__index">01</span>
+            <h3>Healthcare</h3>
+            <p>Experienced in healthcare applications for patient management, clinical workflows, medication support, and AI-driven solutions.</p>
+          </article>
+          <article class="domain-item reveal" style="--delay: 70ms">
+            <span class="domain-item__index">02</span>
+            <h3>E-Commerce</h3>
+            <p>Online storefronts, product catalogs, and order-ready shopping experiences.</p>
+          </article>
+          <article class="domain-item reveal" style="--delay: 140ms">
+            <span class="domain-item__index">03</span>
+            <h3>Mobile Apps</h3>
+            <p>Flutter health apps with reminders, feedback loops, and clean UI design.</p>
+          </article>
+          <article class="domain-item reveal" style="--delay: 210ms">
+            <span class="domain-item__index">04</span>
+            <h3>Research &amp; ML</h3>
+            <p>Prescription AI, drunk-driver detection, and applied machine learning.</p>
+          </article>
+          <article class="domain-item reveal" style="--delay: 280ms">
+            <span class="domain-item__index">05</span>
+            <h3>AgriTech &amp; IoT</h3>
+            <p>Smart farming tools, sensor systems, and agriculture marketplaces.</p>
+          </article>
+          <article class="domain-item reveal" style="--delay: 350ms">
+            <span class="domain-item__index">06</span>
+            <h3>Hospitality</h3>
+            <p>Restaurant discovery, reservations, menus, and table management.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience" aria-labelledby="experience-heading">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 id="experience-heading" class="section-title">Experience</h2>
+        </header>
+
+        <div class="timeline">
+          <article class="timeline-card reveal">
+            <div class="timeline-card__dot" aria-hidden="true"></div>
+            <div class="timeline-card__head">
+              <div>
+                <h3>Software Engineer</h3>
+                <p class="timeline-card__company">Medcube USA</p>
+              </div>
+              <span class="timeline-card__date">Mar 2025 – Present</span>
+            </div>
+            <ul class="timeline-card__points">
+              <li>Developed the Patient Kiosk Application with secure login, improving data security and reducing manual work.</li>
+              <li>Built Billing and EHR features using .NET Core, Angular, and MS SQL Server, enhancing workflow efficiency.</li>
+              <li>Integrated SMS and Email communication, improving patient interaction.</li>
+              <li>Collaborated with the AI team to implement Voice Detection and Voice-to-Text Summarization.</li>
+              <li>Implemented report print and download functionality, improving data accessibility.</li>
+              <li>Managed Dev/QA releases across environments and conducted client demonstrations.</li>
+              <li>Fixed high-priority bugs and shipped new features to improve system stability.</li>
+              <li>Explained new features to clients, increasing adoption and satisfaction.</li>
+            </ul>
+            <ul class="skill-tags" aria-label="Tools">
+              <li><i class="devicon-dotnetcore-plain colored"></i>.NET Core</li>
+              <li><i class="devicon-angularjs-plain colored"></i>Angular</li>
+              <li><i class="devicon-microsoftsqlserver-plain colored"></i>MS SQL</li>
+              <li><span class="mini-glyph">AI</span>AI APIs</li>
+              <li><i class="devicon-azure-plain colored"></i>Azure DevOps</li>
+            </ul>
+          </article>
+
+          <article class="timeline-card reveal">
+            <div class="timeline-card__dot" aria-hidden="true"></div>
+            <div class="timeline-card__head">
+              <div>
+                <h3>Software Engineering Intern</h3>
+                <p class="timeline-card__company">Omobio (Pvt) Ltd</p>
+              </div>
+              <span class="timeline-card__date">Feb 2023 – Aug 2023</span>
+            </div>
+            <ul class="timeline-card__points">
+              <li>Developed Omobio's New Generation website using SvelteKit, TypeScript, and Tailwind CSS.</li>
+              <li>Implemented dynamic UI components and integrated the frontend with Sanity CMS.</li>
+              <li>Contributed to backend development of the CDR system using PHP Yii and Java.</li>
+              <li>Fixed critical bugs and implemented features to improve stability and performance.</li>
+              <li>Executed test cases and reported defects to ensure software quality.</li>
+              <li>Worked in Agile/Scrum using GitLab, Docker, and Jira.</li>
+            </ul>
+            <ul class="skill-tags" aria-label="Tools">
+              <li><i class="devicon-svelte-plain colored"></i>SvelteKit</li>
+              <li><i class="devicon-typescript-plain colored"></i>TypeScript</li>
+              <li><i class="devicon-tailwindcss-original colored"></i>Tailwind</li>
+              <li><i class="devicon-php-plain colored"></i>PHP Yii</li>
+              <li><i class="devicon-docker-plain colored"></i>Docker</li>
+              <li><i class="devicon-jira-plain colored"></i>Jira</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section projects-lab" id="projects" aria-labelledby="projects-heading">
+      <div class="container">
+        <header class="section-head section-head--light reveal">
+          <h2 id="projects-heading" class="section-title">Projects</h2>
+        </header>
+
+        <div class="proj-filters reveal" role="tablist" aria-label="Project categories">
+          <button type="button" class="proj-filter is-active" data-filter="all" aria-selected="true">All</button>
+          <button type="button" class="proj-filter" data-filter="professional" aria-selected="false">Professional</button>
+          <button type="button" class="proj-filter" data-filter="academic" aria-selected="false">Academic</button>
+          <button type="button" class="proj-filter" data-filter="personal" aria-selected="false">Personal</button>
+        </div>
+
+        <div class="proj-stage reveal">
+          <div class="proj-stage__frame">
+            <img class="proj-stage__img" id="proj-stage-img" src="assets/claudmd.jpg" alt="ClaudMD project preview" decoding="async" fetchpriority="high" />
+            <div class="proj-stage__veil"></div>
+            <div class="proj-stage__panel">
+              <div class="proj-stage__tags" id="proj-stage-tags"></div>
+              <p class="proj-stage__kicker" id="proj-stage-kicker">Professional · 2026</p>
+              <h3 id="proj-stage-title">ClaudMD</h3>
+              <p id="proj-stage-desc"></p>
+              <p class="proj-stage__role" id="proj-stage-role"></p>
+              <div class="proj-stage__tech" id="proj-stage-tech"></div>
+            </div>
+            <div class="proj-stage__nav">
+              <button type="button" class="proj-nav-btn" id="proj-prev" aria-label="Previous project">←</button>
+              <span id="proj-counter">01 / 11</span>
+              <button type="button" class="proj-nav-btn" id="proj-next" aria-label="Next project">→</button>
+            </div>
+            <div class="proj-auto" aria-hidden="true">
+              <div class="proj-auto__bar" id="proj-auto-bar"></div>
+            </div>
+          </div>
+
+          <div class="proj-rail" id="proj-rail" aria-label="Project selector"></div>
+        </div>
+
+        <!-- Project data source -->
+        <div id="proj-data" hidden>
+          <article data-category="professional" data-img="assets/claudmd.jpg" data-year="2026" data-domain="Healthcare SaaS" data-title="ClaudMD" data-role="Role: Full-Stack Developer" data-tech="C#|.NET 7.0|Angular 16|MS SQL|AI APIs">
+            <p>A comprehensive healthcare management platform designed for clinical environments to support patient registration, appointment scheduling, consultations, electronic health records (EHR), billing, payments, and clinical documentation. Patients can manage appointments and required information, while healthcare professionals can manage patient records, prescriptions, consultations, and clinical workflows. The platform also supports reporting and AI-assisted documentation to improve efficiency and reduce manual work.</p>
+          </article>
+          <article data-category="professional" data-img="assets/kioski.jpg" data-year="2026" data-domain="Patient Kiosk" data-title="Kioski" data-role="Role: Full-Stack Developer" data-tech="C#|.NET 7.0|Angular 16|MS SQL">
+            <p>A patient-facing digital kiosk designed to simplify the check-in and registration process within healthcare clinics. It allows patients to securely access the kiosk, verify their information, complete required registration details, and provide consent through dynamically linked forms before their consultation. The system helps reduce manual paperwork and administrative workload by allowing patients to complete necessary information digitally. It also supports user validation and dynamic consent-form handling based on the patient's workflow.</p>
+          </article>
+          <article data-category="academic" data-img="assets/prescription.jpg" data-year="2024" data-domain="Level 4 · ML" data-title="Automated Prescription Detection" data-role="Role: Medication name correction &amp; instruction expansion" data-tech="Python|CNN|LLM|OpenAI">
+            <p>An AI-powered healthcare system designed to assist in processing handwritten medical prescriptions, where unclear handwriting, abbreviations, and spelling variations can make prescription information difficult to interpret. The system processes prescription images and extracts relevant information such as medicine names and instructions. It uses machine learning and AI techniques to recognize handwritten prescription content and suggest possible medicine names when text contains spelling errors or abbreviations.</p>
+          </article>
+          <article data-category="academic" data-img="assets/scape-goat.jpg" data-year="2024" data-domain="Unity Game" data-title="Scape Goat" data-role="Role: Full game — mechanics, animations, and level design" data-tech="C#|Unity">
+            <p>A Unity-based 2D game where the player controls a child character and guides them safely to the destination while avoiding moving vehicles and other obstacles. Developed the complete game from concept to implementation, including player movement, game mechanics, animations, obstacle behavior, collision handling, and level design.</p>
+          </article>
+          <article data-category="academic" data-img="assets/cultivation.jpg" data-year="2020" data-domain="Hardware · Level 1" data-title="Cultivation Protection System" data-role="Role: Soil moisture sensor design &amp; implementation" data-tech="C|Atmega32">
+            <p>A smart agriculture system developed to help farmers protect their crops from environmental and wildlife-related threats. The system monitors soil moisture and provides an elephant-repelling mechanism based on bee sounds to deter elephants and reduce human-elephant conflicts around cultivation areas.</p>
+          </article>
+          <article data-category="personal" data-img="assets/reservation-hub.jpg" data-year="2026" data-domain="Restaurant" data-title="Reservation Hub" data-role="Role: Full-Stack Developer" data-tech="ReactJS|ASP.NET Core|MS SQL">
+            <p>A restaurant management and reservation platform for discovering restaurants, exploring menus, and making table reservations. Customers can view restaurant details, browse menu items, select date and time, and reserve a table. On the restaurant side, the system helps manage information, menus, table availability, reservations, and orders.</p>
+          </article>
+          <article data-category="personal" data-img="assets/enginex.jpg" data-year="2025" data-domain="Engineering" data-title="Enginex" data-role="Role: Full-Stack Developer" data-tech="React|ASP.NET Core|Tailwind|Firebase">
+            <p>Enginex is a web platform for industrial engineering and product development, connecting clients with services such as prototyping, 3D modeling, CAD, manufacturing, simulations, and component sourcing. It also includes an e-commerce storefront for industrial products with user accounts, checkout, and an admin area for managing products, orders, and users.</p>
+          </article>
+          <article data-category="personal" data-img="assets/luxe-leather.jpg" data-year="2026" data-domain="E-Commerce" data-title="Luxe Leather" data-role="Role: Full-Stack Developer" data-tech="React|ASP.NET Core|MongoDB">
+            <p>A web-based e-commerce platform for a leather products business, offering an online marketplace for shoes, caps, purses, and other leather accessories with a modern, responsive storefront and scalable product and order management.</p>
+          </article>
+          <article data-category="personal" data-img="assets/agri-mart.jpg" data-year="2021" data-domain="Level 2 · Agri Tech" data-title="Agri Mart" data-role="Role: Registration, login, profile &amp; review management" data-tech="ReactJS|Spring Boot|MongoDB">
+            <p>A web-based agricultural e-commerce marketplace connecting farmers directly with customers. Supports product discovery, competitive pricing, reliable delivery, and social media integration to expand farmers' market reach.</p>
+          </article>
+          <article data-category="personal" data-img="assets/med-mind.jpg" data-year="2021" data-domain="Mobile · Health" data-title="Med Mind" data-role="Role: Figma UI + medication reminder feature" data-tech="Flutter|Firebase|Figma">
+            <p>A mobile healthcare application that reminds patients to take medicines on schedule and shares feedback with guardians on whether medication was taken, supporting safer medication routines.</p>
+          </article>
+          <article data-category="personal" data-img="assets/drunk-driver.jpg" data-year="2026" data-domain="Machine Learning" data-title="Drunk Driver Detection System" data-role="Role: Machine Learning Developer" data-tech="Python|Machine Learning">
+            <p>An AI-based driver safety system designed to detect potential alcohol impairment in bus drivers using thermal imaging and machine learning. The system captures thermal data from the driver and uses a trained machine learning model to classify whether the driver shows signs associated with alcohol consumption. The solution aims to support safer public transportation through automated driver monitoring and early detection of potential impairment.
+</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <!-- SKILLS -->
+    <section class="section section--skills" id="skills" aria-labelledby="skills-heading">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 id="skills-heading" class="section-title">Technical Skills</h2>
+        </header>
+
+        <div class="skills-grid">
+          <article class="skill-card reveal">
+            <h3>Programming Languages</h3>
+            <ul class="skill-tags">
+              <li><i class="devicon-c-plain colored"></i>C</li>
+              <li><i class="devicon-java-plain colored"></i>Java</li>
+              <li><i class="devicon-python-plain colored"></i>Python</li>
+              <li><i class="devicon-javascript-plain colored"></i>JavaScript</li>
+              <li><i class="devicon-typescript-plain colored"></i>TypeScript</li>
+              <li class="is-accent"><i class="devicon-csharp-plain colored"></i>C#</li>
+            </ul>
+          </article>
+
+          <article class="skill-card reveal">
+            <h3>Frameworks &amp; Backend</h3>
+            <ul class="skill-tags">
+              <li class="is-accent"><i class="devicon-dotnetcore-plain colored"></i>.NET Core</li>
+              <li class="is-accent"><i class="devicon-angularjs-plain colored"></i>Angular</li>
+              <li class="is-accent"><i class="devicon-react-original colored"></i>React.js</li>
+              <li><i class="devicon-spring-original colored"></i>Spring Boot</li>
+              <li><i class="devicon-svelte-plain colored"></i>Svelte</li>
+              <li><i class="devicon-php-plain colored"></i>PHP</li>
+            </ul>
+          </article>
+
+          <article class="skill-card reveal">
+            <h3>Web Technologies</h3>
+            <ul class="skill-tags">
+              <li><i class="devicon-html5-plain colored"></i>HTML5</li>
+              <li><i class="devicon-css3-plain colored"></i>CSS3</li>
+              <li><i class="devicon-tailwindcss-original colored"></i>Tailwind</li>
+              <li><span class="mini-glyph">AI</span>AI API Integration</li>
+            </ul>
+          </article>
+
+          <article class="skill-card reveal">
+            <h3>Databases &amp; Cloud</h3>
+            <ul class="skill-tags">
+              <li><i class="devicon-microsoftsqlserver-plain colored"></i>MS SQL Server</li>
+              <li><i class="devicon-mysql-original colored"></i>MySQL</li>
+              <li><i class="devicon-mongodb-plain colored"></i>MongoDB</li>
+              <li><i class="devicon-firebase-plain colored"></i>Firebase</li>
+            </ul>
+          </article>
+
+          <article class="skill-card reveal">
+            <h3>Tools &amp; DevOps</h3>
+            <ul class="skill-tags">
+              <li><i class="devicon-azure-plain colored"></i>Azure DevOps</li>
+              <li><i class="devicon-docker-plain colored"></i>Docker</li>
+              <li><i class="devicon-git-plain colored"></i>Git</li>
+              <li><i class="devicon-jira-plain colored"></i>Jira</li>
+              <li><i class="devicon-postman-plain colored"></i>Postman</li>
+              <li><i class="devicon-selenium-original colored"></i>Selenium</li>
+            </ul>
+          </article>
+
+          <article class="skill-card reveal">
+            <h3>IDEs &amp; Design</h3>
+            <ul class="skill-tags">
+              <li><i class="devicon-vscode-plain colored"></i>VS Code</li>
+              <li><i class="devicon-visualstudio-plain colored"></i>Visual Studio</li>
+              <li><i class="devicon-intellij-plain colored"></i>IntelliJ</li>
+              <li><i class="devicon-figma-plain colored"></i>Figma</li>
+              <li><i class="devicon-trello-plain colored"></i>Trello</li>
+              <li><i class="devicon-unity-plain colored"></i>Unity</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="section section--soft" id="education" aria-labelledby="education-heading">
+      <div class="container">
+        <div class="edu-layout">
+          <header class="section-head section-head--edu reveal">
+            <h2 id="education-heading" class="section-title">Education &amp; Extracurricular</h2>
+          </header>
+
+          <header class="section-head section-head--soft reveal">
+            <h2 id="soft-skills-heading" class="section-title">Non-Technical Skills</h2>
+          </header>
+
+          <div class="edu-journey">
+            <article class="edu-milestone edu-milestone--featured reveal">
+              <div class="edu-milestone__rail" aria-hidden="true">
+                <span class="edu-milestone__node"></span>
+              </div>
+              <div class="edu-milestone__body">
+                <div class="edu-milestone__meta">
+                  <span class="badge">Degree</span>
+                  <time datetime="2020">2020 – 2024</time>
+                </div>
+                <h3>BSc (Hons) in Information Technology and Management</h3>
+                <p class="edu-milestone__school">University of Moratuwa</p>
+                <div class="edu-milestone__stats">
+                  <div><strong>3.08</strong><span>GPA</span></div>
+                  <div><strong>4 yrs</strong><span>Program</span></div>
+                  <div><strong>IT &amp; Mgmt</strong><span>Focus</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="edu-milestone reveal">
+              <div class="edu-milestone__rail" aria-hidden="true">
+                <span class="edu-milestone__node"></span>
+              </div>
+              <div class="edu-milestone__body">
+                <div class="edu-milestone__meta">
+                  <span class="badge">Advanced Level</span>
+                  <time datetime="2018">2018</time>
+                </div>
+                <h3>G.C.E. Advanced Level</h3>
+                <p class="edu-milestone__school">Ibbagamuwa Central College</p>
+                <div class="edu-milestone__stats">
+                  <div><strong>3A's</strong><span>Results</span></div>
+                  <div><strong>1.8015</strong><span>Z-score</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="edu-milestone edu-milestone--activity reveal">
+              <div class="edu-milestone__rail" aria-hidden="true">
+                <span class="edu-milestone__node"></span>
+              </div>
+              <div class="edu-milestone__body">
+                <div class="edu-milestone__meta">
+                  <span class="badge">Extracurricular</span>
+                </div>
+                <h3>University &amp; community involvement</h3>
+                <p class="edu-milestone__school">Roles that built collaboration and delivery habits.</p>
+                <ul class="edu-chips">
+                  <li>
+                    <strong>IEEE Student Branch</strong>
+                    <span>University of Moratuwa · 2021–2022</span>
+                  </li>
+                  <li>
+                    <strong>AIESEC</strong>
+                    <span>Incoming Global Volunteer Committee · 2020</span>
+                  </li>
+                  <li>
+                    <strong>LEO Club</strong>
+                    <span>Coordination Committee — Literia · 2021</span>
+                  </li>
+                  <li>
+                    <strong>INTECS</strong>
+                    <span>Member, Faculty of IT</span>
+                  </li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
+          <aside class="soft-panel reveal" aria-labelledby="soft-skills-heading">
+            <ul class="soft-list">
+              <li>
+                <span class="soft-list__mark">01</span>
+                <div>
+                  <strong>Communication Skills</strong>
+                  <span>Clear updates with clients, teammates, and stakeholders.</span>
+                </div>
+              </li>
+              <li>
+                <span class="soft-list__mark">02</span>
+                <div>
+                  <strong>Leadership</strong>
+                  <span>Taking ownership, guiding teammates, and driving work forward.</span>
+                </div>
+              </li>
+              <li>
+                <span class="soft-list__mark">03</span>
+                <div>
+                  <strong>Self-Learning</strong>
+                  <span>Picking up new tools, stacks, and concepts quickly when needed.</span>
+                </div>
+              </li>
+              <li>
+                <span class="soft-list__mark">04</span>
+                <div>
+                  <strong>Teamwork</strong>
+                  <span>Working well across frontend, backend, QA, and AI partners.</span>
+                </div>
+              </li>
+              <li>
+                <span class="soft-list__mark">05</span>
+                <div>
+                  <strong>Problem Solving</strong>
+                  <span>Breaking down bugs and features into practical next steps.</span>
+                </div>
+              </li>
+              <li>
+                <span class="soft-list__mark">06</span>
+                <div>
+                  <strong>Client Engagement</strong>
+                  <span>Explaining features and gathering feedback in demos.</span>
+                </div>
+              </li>
+              <li>
+                <span class="soft-list__mark">07</span>
+                <div>
+                  <strong>Adaptability</strong>
+                  <span>Switching between healthcare, web, mobile, and research work.</span>
+                </div>
+              </li>
+            </ul>
+
+            <div class="lang-block">
+              <h4>Languages</h4>
+              <p class="lang-line">English · Sinhala</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section class="section section--achievements" id="achievements" aria-labelledby="achievements-heading">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 id="achievements-heading" class="section-title">Achievements</h2>
+        </header>
+        <div class="achieve-grid">
+          <article class="achieve-card reveal">
+            <span class="achieve-card__year">2022</span>
+            <p class="achieve-card__tag">Semi Finalist</p>
+            <h3>IDEALIZE</h3>
+            <p>Hackathon organized by AIESEC, University of Moratuwa.</p>
+          </article>
+          <article class="achieve-card reveal">
+            <span class="achieve-card__year">2022</span>
+            <p class="achieve-card__tag">Participant</p>
+            <h3>Aurora</h3>
+            <p>Hackathon organized by University of Sri Jayewardenepura.</p>
+          </article>
+          <article class="achieve-card reveal">
+            <span class="achieve-card__year">2022</span>
+            <p class="achieve-card__tag">Participant</p>
+            <h3>HackMoral 4.0</h3>
+            <p>Mini Hackathon organized by INTECS, University of Moratuwa.</p>
+          </article>
+          <article class="achieve-card reveal">
+            <span class="achieve-card__year">2021</span>
+            <p class="achieve-card__tag">Finalist</p>
+            <h3>TADHACK Sri Lanka</h3>
+            <p>Global Innovation Hackathon organized by hSenid Mobile.</p>
+          </article>
+          <article class="achieve-card reveal">
+            <span class="achieve-card__year">2020</span>
+            <p class="achieve-card__tag">Participant</p>
+            <h3>Code Rush</h3>
+            <p>Coding competition organized by INTECS, University of Moratuwa.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA / CONTACT -->
+    <section class="section section--cta" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="cta reveal">
+          <h2 id="contact-heading" class="section-title section-title--on-dark">Let's Connect</h2>
+          <p>Open to full-time roles and meaningful collaborations.</p>
+          <div class="cta__actions">
+            <a class="btn btn--light" href="mailto:imesha.jul99@gmail.com">Start a Conversation</a>
+            <a class="btn btn--outline" href="assets/Imesha%20Basnayake_CV.pdf" download="Imesha_Basnayake_CV.pdf">Download CV</a>
+          </div>
+
+          <div class="cta-grid">
+            <div class="cta-item cta-item--phones">
+              <span>Phone</span>
+              <a href="tel:+94764155812"><strong>+94 76 415 5812</strong></a>
+              <a href="tel:+94704833113"><strong>+94 70 483 3113</strong></a>
+            </div>
+            <a class="cta-item" href="mailto:imesha.jul99@gmail.com"><span>Email</span><strong>imesha.jul99@gmail.com</strong></a>
+            <div class="cta-item"><span>Location</span><strong>Kurunegala, Sri Lanka</strong></div>
+            <a class="cta-item" href="https://linkedin.com/in/imesha-basnayake" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><strong>imesha-basnayake</strong></a>
+            <a class="cta-item" href="https://github.com/Imesha599" target="_blank" rel="noopener noreferrer"><span>GitHub</span><strong>Imesha599</strong></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <a class="nav__brand footer__brand" href="#top">
+          <span class="nav__logo">IB</span>
+          <span class="nav__name">Imesha<span>Basnayake</span></span>
+        </a>
+        <p>Software Engineer focused on building scalable software solutions.</p>
+      </div>
+      <div>
+        <h3>Navigate</h3>
+        <ul>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#achievements">Achievements</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:imesha.jul99@gmail.com">imesha.jul99@gmail.com</a></li>
+          <li><a href="tel:+94764155812">+94 76 415 5812</a></li>
+          <li><a href="tel:+94704833113">+94 70 483 3113</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>&copy; <span id="year"></span> Imesha Basnayake. All rights reserved.</p>
+      <a href="#top" id="back-to-top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
