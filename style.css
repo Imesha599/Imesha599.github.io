@@ -1060,12 +1060,13 @@ p {
   font-size: clamp(1.85rem, 3.2vw, 2.45rem);
   font-weight: 650;
   font-optical-sizing: auto;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.04em;
   line-height: 1.15;
   color: var(--green-950);
   position: relative;
   display: inline-block;
   padding-bottom: 0.45rem;
+  text-transform: uppercase;
 }
 
 .section-title::after {
@@ -1698,14 +1699,40 @@ p {
   .proj-stage__panel {
     width: calc(100% - 1.5rem);
     left: 0.75rem;
-    top: 50%;
-    max-height: calc(100% - 4.75rem);
+    top: 46%;
+    max-height: calc(100% - 7.5rem);
     transform: translateY(-50%);
+    padding-bottom: 0.85rem;
+  }
+
+  .proj-filters {
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 0.35rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .proj-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .proj-filter {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.45rem 0.4rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.02em;
+    text-align: center;
+    white-space: nowrap;
   }
 
   .proj-stage__nav {
-    right: 0.75rem;
-    bottom: 0.75rem;
+    left: 50%;
+    right: auto;
+    bottom: 0.55rem;
+    transform: translateX(-50%);
   }
 
   .proj-rail {
