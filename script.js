@@ -118,8 +118,39 @@
   const counter = document.getElementById("proj-counter");
   const prevBtn = document.getElementById("proj-prev");
   const nextBtn = document.getElementById("proj-next");
+  const galleryBtn = document.getElementById("proj-gallery-btn");
+  const stageHit = document.getElementById("proj-stage-hit");
+  const caseStudy = document.getElementById("case-study");
+  const caseScroll = document.getElementById("case-study-scroll");
+  const caseKicker = document.getElementById("case-kicker");
+  const caseTitle = document.getElementById("case-title");
+  const caseHeroImg = document.getElementById("case-hero-img");
+  const caseStory = document.getElementById("case-story");
+  const caseVideoBlock = document.getElementById("case-video-block");
+  const caseVideoFrame = document.getElementById("case-video-frame");
+  const caseVideo = document.getElementById("case-video");
+  const caseVideoPlay = document.getElementById("case-video-play");
+  const caseMosaic = document.getElementById("case-mosaic");
+  const caseFeatures = document.getElementById("case-features");
+  const caseTech = document.getElementById("case-tech");
+  const caseTechFacts = document.getElementById("case-tech-facts");
+  const caseGithubBlock = document.getElementById("case-github-block");
+  const caseGithub = document.getElementById("case-github");
+  const caseGithubText = document.getElementById("case-github-text");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxCaption = document.getElementById("lightbox-caption");
+  const lightboxCounter = document.getElementById("lightbox-counter");
+  const lightboxPrev = document.getElementById("lightbox-prev");
+  const lightboxNext = document.getElementById("lightbox-next");
 
   if (filters.length && dataNodes.length && rail && stageImg) {
+    const splitPipe = (value) =>
+      (value || "")
+        .split("|")
+        .map((item) => item.trim())
+        .filter(Boolean);
+
     const projects = dataNodes.map((node, index) => ({
       index,
       category: node.getAttribute("data-category") || "personal",
@@ -128,7 +159,16 @@
       domain: node.getAttribute("data-domain") || "",
       title: node.getAttribute("data-title") || "Project",
       role: node.getAttribute("data-role") || "",
-      tech: (node.getAttribute("data-tech") || "").split("|").filter(Boolean),
+      tech: splitPipe(node.getAttribute("data-tech")),
+      gallery: splitPipe(node.getAttribute("data-gallery")),
+      labels: splitPipe(node.getAttribute("data-gallery-labels")),
+      video: (node.getAttribute("data-video") || "").trim(),
+      cover: (node.getAttribute("data-cover") || "").trim(),
+      features: splitPipe(node.getAttribute("data-features")).map((item) => {
+        const [title, detail] = item.split("::").map((part) => part.trim());
+        return { title: title || item, detail: detail || "" };
+      }),
+      github: (node.getAttribute("data-github") || "").trim(),
       desc: (node.querySelector("p")?.textContent || "").trim(),
     }));
 
@@ -182,6 +222,12 @@
     let activeIndex = 0;
     let autoTimer = null;
     let resumeTimer = null;
+    let caseOpen = false;
+    let lightboxOpen = false;
+    let lightboxIndex = 0;
+    let lastFocus = null;
+    let caseRevealObserver = null;
+    let videoObserver = null;
     const AUTO_MS = 6500;
     const RESUME_MS = 10000;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -239,7 +285,7 @@
     };
 
     const startAuto = () => {
-      if (reduceMotion) return;
+      if (reduceMotion || caseOpen) return;
       if (resumeTimer) {
         window.clearTimeout(resumeTimer);
         resumeTimer = null;
@@ -255,11 +301,289 @@
     const pauseAutoTemporarily = () => {
       stopAuto();
       if (resumeTimer) window.clearTimeout(resumeTimer);
-      if (reduceMotion) return;
+      if (reduceMotion || caseOpen) return;
       resumeTimer = window.setTimeout(() => {
         resumeTimer = null;
         startAuto();
       }, RESUME_MS);
+    };
+
+    const labelFor = (project, index) =>
+      project.labels[index] || `Screenshot ${index + 1}`;
+
+    const stopCaseVideo = () => {
+      if (!caseVideo) return;
+      caseVideo.pause();
+      caseVideo.removeAttribute("src");
+      caseVideo.load();
+      if (caseVideoFrame) caseVideoFrame.classList.remove("is-playing");
+    };
+
+    const tryAutoplayVideo = () => {
+      if (!caseVideo || !caseVideo.src || reduceMotion) return;
+      caseVideo.muted = true;
+      const playPromise = caseVideo.play();
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise
+          .then(() => {
+            if (caseVideoFrame) caseVideoFrame.classList.add("is-playing");
+          })
+          .catch(() => {
+            if (caseVideoFrame) caseVideoFrame.classList.remove("is-playing");
+          });
+      }
+    };
+
+    const observeCaseReveals = () => {
+      if (!caseStudy) return;
+      const reveals = caseStudy.querySelectorAll(".case-reveal, .case-mosaic__item");
+      reveals.forEach((el) => el.classList.remove("is-in"));
+
+      if (caseRevealObserver) caseRevealObserver.disconnect();
+
+      if (reduceMotion) {
+        reveals.forEach((el) => el.classList.add("is-in"));
+        return;
+      }
+
+      caseRevealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const delay = Number(el.dataset.delay || 0);
+            window.setTimeout(() => el.classList.add("is-in"), delay);
+            caseRevealObserver.unobserve(el);
+          });
+        },
+        { root: caseScroll, threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
+      );
+
+      reveals.forEach((el) => caseRevealObserver.observe(el));
+    };
+
+    const observeVideo = () => {
+      if (videoObserver) {
+        videoObserver.disconnect();
+        videoObserver = null;
+      }
+      if (!caseVideoBlock || caseVideoBlock.hidden || !caseVideo || reduceMotion) return;
+
+      videoObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) tryAutoplayVideo();
+          else if (caseVideo && !caseVideo.paused) {
+            caseVideo.pause();
+            if (caseVideoFrame) caseVideoFrame.classList.remove("is-playing");
+          }
+        },
+        { root: caseScroll, threshold: 0.55 }
+      );
+      videoObserver.observe(caseVideoBlock);
+    };
+
+    const renderMosaic = (project) => {
+      if (!caseMosaic) return;
+      caseMosaic.innerHTML = "";
+      const mosaicImages = project.cover ? project.gallery : project.gallery.slice(1);
+      const indexOffset = project.cover ? 0 : 1;
+      mosaicImages.forEach((src, mosaicIndex) => {
+        const imageIndex = mosaicIndex + indexOffset;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "case-mosaic__item";
+        btn.dataset.delay = String(mosaicIndex * 90);
+        btn.setAttribute("aria-label", `Open ${labelFor(project, imageIndex)}`);
+        btn.innerHTML = `
+          <img src="${src}" alt="${labelFor(project, imageIndex)}" loading="lazy" decoding="async" />
+          <span class="case-mosaic__label">${labelFor(project, imageIndex)}</span>
+        `;
+        btn.addEventListener("click", () => openLightbox(imageIndex));
+        caseMosaic.appendChild(btn);
+      });
+    };
+
+    const populateCaseStudy = (project) => {
+      if (caseKicker) {
+        caseKicker.textContent = `${project.category} · ${project.year}${project.domain ? ` · ${project.domain}` : ""}`;
+      }
+      if (caseTitle) caseTitle.textContent = project.title;
+      if (caseStory) caseStory.textContent = project.desc;
+
+      const heroSrc = project.cover || project.gallery[0] || project.img;
+      if (caseHeroImg) {
+        caseHeroImg.src = heroSrc;
+        caseHeroImg.alt = `${project.title} cover`;
+      }
+
+      if (caseVideoBlock && caseVideo) {
+        if (project.video) {
+          caseVideoBlock.hidden = false;
+          caseVideo.poster = heroSrc;
+          caseVideo.src = project.video;
+          caseVideo.muted = true;
+          caseVideo.controls = true;
+          caseVideo.playsInline = true;
+          caseVideo.setAttribute("controlsList", "nodownload");
+          caseVideo.setAttribute("disablePictureInPicture", "");
+          if (caseVideoFrame) caseVideoFrame.classList.remove("is-playing");
+        } else {
+          caseVideoBlock.hidden = true;
+          stopCaseVideo();
+        }
+      }
+
+      renderMosaic(project);
+
+      if (caseFeatures) {
+        caseFeatures.innerHTML = "";
+        const featureList = project.features.length
+          ? project.features
+          : [
+              { title: "Full-stack implementation", detail: "End-to-end feature delivery across UI and backend." },
+              { title: "Responsive interface", detail: "Layouts that stay clear on desktop and mobile." },
+              { title: "Production-ready architecture", detail: "Structured for maintainable, scalable growth." },
+            ];
+
+        featureList.forEach((feature, index) => {
+          const card = document.createElement("article");
+          card.className = "case-feature-card";
+          card.style.setProperty("--i", String(index));
+          card.innerHTML = `
+            <span class="case-feature-card__num">${String(index + 1).padStart(2, "0")}</span>
+            <div class="case-feature-card__body">
+              <h4>${feature.title}</h4>
+              ${feature.detail ? `<p>${feature.detail}</p>` : ""}
+            </div>
+          `;
+          caseFeatures.appendChild(card);
+        });
+      }
+
+      if (caseTech) {
+        caseTech.innerHTML = "";
+        project.tech.forEach((tech) => caseTech.appendChild(renderTechChip(tech)));
+      }
+
+      if (caseTechFacts) {
+        caseTechFacts.innerHTML = "";
+        const facts = [
+          ["Role", project.role ? project.role.replace(/^Role:\s*/i, "") : ""],
+          ["Domain", project.domain],
+          ["Year", project.year],
+          ["Category", project.category],
+        ].filter(([, value]) => Boolean(value));
+
+        facts.forEach(([label, value]) => {
+          const dt = document.createElement("dt");
+          dt.textContent = label;
+          const dd = document.createElement("dd");
+          dd.textContent = value;
+          caseTechFacts.appendChild(dt);
+          caseTechFacts.appendChild(dd);
+        });
+      }
+
+      if (caseGithubBlock && caseGithub) {
+        if (project.github) {
+          caseGithubBlock.hidden = false;
+          caseGithub.href = project.github;
+          if (caseGithubText) {
+            caseGithubText.textContent = `Browse the ${project.title} repository on GitHub.`;
+          }
+        } else {
+          caseGithubBlock.hidden = true;
+          caseGithub.removeAttribute("href");
+        }
+      }
+    };
+
+    const openCaseStudy = () => {
+      const project = projects[activeIndex];
+      if (!project?.gallery?.length || !caseStudy) return;
+
+      lastFocus = document.activeElement;
+      caseOpen = true;
+      stopAuto();
+      if (resumeTimer) {
+        window.clearTimeout(resumeTimer);
+        resumeTimer = null;
+      }
+
+      populateCaseStudy(project);
+      if (caseScroll) caseScroll.scrollTop = 0;
+
+      caseStudy.hidden = false;
+      caseStudy.setAttribute("aria-hidden", "false");
+      caseStudy.classList.add("is-open");
+      document.body.classList.add("gallery-open");
+
+      window.requestAnimationFrame(() => {
+        observeCaseReveals();
+        observeVideo();
+      });
+
+      const closeBtn = caseStudy.querySelector(".case-study__close");
+      if (closeBtn) closeBtn.focus();
+    };
+
+    const closeLightbox = () => {
+      if (!lightbox || !lightboxOpen) return;
+      lightboxOpen = false;
+      lightbox.hidden = true;
+      lightbox.setAttribute("aria-hidden", "true");
+      lightbox.classList.remove("is-open");
+      if (lightboxImg) {
+        lightboxImg.removeAttribute("src");
+        lightboxImg.alt = "";
+      }
+    };
+
+    const closeCaseStudy = () => {
+      if (!caseStudy || !caseOpen) return;
+      closeLightbox();
+      caseOpen = false;
+      stopCaseVideo();
+      if (caseRevealObserver) caseRevealObserver.disconnect();
+      if (videoObserver) videoObserver.disconnect();
+      caseStudy.classList.remove("is-open");
+      caseStudy.hidden = true;
+      caseStudy.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("gallery-open");
+      if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+      if (sectionInView && !resumeTimer) startAuto();
+    };
+
+    const renderLightbox = () => {
+      const project = projects[activeIndex];
+      if (!project?.gallery?.length || !lightboxImg) return;
+      const src = project.gallery[lightboxIndex];
+      lightboxImg.src = src;
+      lightboxImg.alt = `${project.title} — ${labelFor(project, lightboxIndex)}`;
+      if (lightboxCaption) lightboxCaption.textContent = labelFor(project, lightboxIndex);
+      if (lightboxCounter) {
+        lightboxCounter.textContent = `${String(lightboxIndex + 1).padStart(2, "0")} / ${String(project.gallery.length).padStart(2, "0")}`;
+      }
+    };
+
+    const openLightbox = (index) => {
+      const project = projects[activeIndex];
+      if (!project?.gallery?.length || !lightbox) return;
+      lightboxIndex = index;
+      lightboxOpen = true;
+      renderLightbox();
+      lightbox.hidden = false;
+      lightbox.setAttribute("aria-hidden", "false");
+      lightbox.classList.add("is-open");
+      const closeBtn = lightbox.querySelector(".lightbox__close");
+      if (closeBtn) closeBtn.focus();
+    };
+
+    const moveLightbox = (direction) => {
+      const project = projects[activeIndex];
+      if (!project?.gallery?.length) return;
+      lightboxIndex = (lightboxIndex + direction + project.gallery.length) % project.gallery.length;
+      renderLightbox();
     };
 
     const renderRail = () => {
@@ -275,7 +599,7 @@
         }
 
         const thumb = project.img
-          ? `<img class="proj-rail__thumb" src="${project.img}" alt="" loading="lazy" decoding="async" width="240" height="150" />`
+          ? `<img class="proj-rail__thumb" src="${project.img}" alt="" loading="lazy" decoding="async" width="148" height="58" />`
           : `<span class="proj-rail__thumb proj-rail__thumb--ph">Soon</span>`;
 
         btn.innerHTML = `
@@ -341,6 +665,22 @@
           stageTech.appendChild(renderTechChip(tech));
         });
 
+        if (galleryBtn) {
+          const hasGallery = project.gallery.length > 0;
+          galleryBtn.hidden = !hasGallery;
+          galleryBtn.setAttribute("aria-hidden", String(!hasGallery));
+        }
+
+        if (stageHit) {
+          const hasGallery = project.gallery.length > 0;
+          stageHit.hidden = !hasGallery;
+          stageHit.setAttribute("aria-hidden", String(!hasGallery));
+        }
+
+        if (stageFrame) {
+          stageFrame.classList.toggle("has-gallery", project.gallery.length > 0);
+        }
+
         const visible = visibleIndexes();
         const position = Math.max(0, visible.indexOf(index)) + 1;
         counter.textContent = `${String(position).padStart(2, "0")} / ${String(visible.length).padStart(2, "0")}`;
@@ -351,7 +691,6 @@
 
         const activeRailItem = rail.querySelector(".proj-rail__item.is-active");
         if (activeRailItem) {
-          // Scroll only the rail track — never the page (scrollIntoView was yanking users back here)
           const left =
             activeRailItem.offsetLeft - (rail.clientWidth - activeRailItem.clientWidth) / 2;
           rail.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
@@ -407,7 +746,86 @@
       });
     }
 
+    if (galleryBtn) {
+      galleryBtn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openCaseStudy();
+      });
+    }
+
+    if (stageHit) {
+      stageHit.addEventListener("click", openCaseStudy);
+    }
+
+    if (caseStudy) {
+      caseStudy.querySelectorAll("[data-case-close]").forEach((el) => {
+        el.addEventListener("click", closeCaseStudy);
+      });
+    }
+
+    // Cover is display-only — no lightbox link
+
+    if (caseVideoPlay && caseVideo) {
+      caseVideo.addEventListener("contextmenu", (event) => event.preventDefault());
+      caseVideoPlay.addEventListener("click", () => {
+        caseVideo.muted = false;
+        caseVideo.controls = true;
+        caseVideo.setAttribute("controlsList", "nodownload");
+        const playPromise = caseVideo.play();
+        if (playPromise && typeof playPromise.then === "function") {
+          playPromise
+            .then(() => {
+              if (caseVideoFrame) caseVideoFrame.classList.add("is-playing");
+            })
+            .catch(() => {
+              if (caseVideoFrame) caseVideoFrame.classList.remove("is-playing");
+            });
+        }
+      });
+      caseVideo.addEventListener("play", () => {
+        if (caseVideoFrame) caseVideoFrame.classList.add("is-playing");
+      });
+      caseVideo.addEventListener("pause", () => {
+        if (caseVideoFrame && caseVideo.currentTime > 0 && !caseVideo.ended) {
+          caseVideoFrame.classList.remove("is-playing");
+        }
+      });
+      caseVideo.addEventListener("ended", () => {
+        if (caseVideoFrame) caseVideoFrame.classList.remove("is-playing");
+      });
+    }
+
+    if (lightbox) {
+      lightbox.querySelectorAll("[data-lightbox-close]").forEach((el) => {
+        el.addEventListener("click", closeLightbox);
+      });
+    }
+    if (lightboxPrev) lightboxPrev.addEventListener("click", () => moveLightbox(-1));
+    if (lightboxNext) lightboxNext.addEventListener("click", () => moveLightbox(1));
+
     document.addEventListener("keydown", (event) => {
+      if (lightboxOpen) {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          closeLightbox();
+        } else if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          moveLightbox(-1);
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
+          moveLightbox(1);
+        }
+        return;
+      }
+
+      if (caseOpen) {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          closeCaseStudy();
+        }
+        return;
+      }
+
       const section = document.getElementById("projects");
       if (!section) return;
       const rect = section.getBoundingClientRect();
@@ -427,17 +845,17 @@
     if (stage) {
       stage.addEventListener("mouseenter", stopAuto);
       stage.addEventListener("mouseleave", () => {
-        if (!resumeTimer) startAuto();
+        if (!resumeTimer && !caseOpen) startAuto();
       });
       stage.addEventListener("focusin", stopAuto);
       stage.addEventListener("focusout", (event) => {
-        if (!stage.contains(event.relatedTarget) && !resumeTimer) startAuto();
+        if (!stage.contains(event.relatedTarget) && !resumeTimer && !caseOpen) startAuto();
       });
     }
 
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) stopAuto();
-      else if (sectionInView) startAuto();
+      else if (sectionInView && !caseOpen) startAuto();
     });
 
     const projectsSection = document.getElementById("projects");
@@ -447,7 +865,7 @@
         ([entry]) => {
           sectionInView = entry.isIntersecting;
           if (sectionInView) {
-            if (!resumeTimer) startAuto();
+            if (!resumeTimer && !caseOpen) startAuto();
           } else {
             stopAuto();
           }

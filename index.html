@@ -221,8 +221,15 @@
           <div class="proj-stage__frame">
             <img class="proj-stage__img" id="proj-stage-img" src="assets/claudmd.jpg" alt="ClaudMD project preview" decoding="async" fetchpriority="high" />
             <div class="proj-stage__veil"></div>
+            <button type="button" class="proj-stage__hit" id="proj-stage-hit" hidden aria-label="Open project case study"></button>
             <div class="proj-stage__panel">
-              <div class="proj-stage__tags" id="proj-stage-tags"></div>
+              <div class="proj-stage__panel-top">
+                <div class="proj-stage__tags" id="proj-stage-tags"></div>
+                <button type="button" class="proj-gallery-btn" id="proj-gallery-btn" hidden>
+                  Explore project
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
               <p class="proj-stage__kicker" id="proj-stage-kicker">Professional · 2026</p>
               <h3 id="proj-stage-title">ClaudMD</h3>
               <p id="proj-stage-desc"></p>
@@ -262,11 +269,39 @@
           <article data-category="personal" data-img="assets/reservation-hub.jpg" data-year="2026" data-domain="Restaurant" data-title="Reservation Hub" data-role="Role: Full-Stack Developer" data-tech="ReactJS|ASP.NET Core|MS SQL">
             <p>A restaurant management and reservation platform for discovering restaurants, exploring menus, and making table reservations. Customers can view restaurant details, browse menu items, select date and time, and reserve a table. On the restaurant side, the system helps manage information, menus, table availability, reservations, and orders.</p>
           </article>
-          <article data-category="personal" data-img="assets/enginex.jpg" data-year="2025" data-domain="Engineering" data-title="Enginex" data-role="Role: Full-Stack Developer" data-tech="React|ASP.NET Core|Tailwind|Firebase">
-            <p>Enginex is a web platform for industrial engineering and product development, connecting clients with services such as prototyping, 3D modeling, CAD, manufacturing, simulations, and component sourcing. It also includes an e-commerce storefront for industrial products with user accounts, checkout, and an admin area for managing products, orders, and users.</p>
+          <article
+            data-category="personal"
+            data-img="assets/enginex.jpg"
+            data-year="2025"
+            data-domain="Industrial Engineering"
+            data-title="Enginex"
+            data-role="Role: Full-Stack Developer"
+            data-tech="React|ASP.NET Core|Tailwind|Firebase"
+            data-cover="assets/Enginex-cover.jpg"
+            data-gallery="assets/Enginex-1.png|assets/Enginex-5.png|assets/Enginex-2.png|assets/Enginex-3.png|assets/Enginex-4.png"
+            data-gallery-labels="Engineering Services|Home page|Prototype|Product storefront|3D Modeling"
+            data-video="assets/Enginex-Demo.mp4"
+            data-features="Engineering services hub::Connect clients with prototyping, CAD, manufacturing, and simulation services|Industrial storefront::E-commerce experience for industrial products and components|Account & checkout::User accounts with a complete order and checkout flow|Admin operations::Manage products, orders, and users from an admin area|Full-stack delivery::Built with React, ASP.NET Core, Tailwind, and Firebase"
+            data-github="https://github.com/Proto-Work26/Protowork-Enginex"
+          >
+            <p>Enginex is a web platform for industrial engineering and product development. It connects clients with services such as prototyping, 3D modeling, CAD, manufacturing, simulations, and component sourcing, while also providing an e-commerce storefront for industrial products with user accounts, checkout, and admin management for products, orders, and users.</p>
           </article>
-          <article data-category="personal" data-img="assets/luxe-leather.jpg" data-year="2026" data-domain="E-Commerce" data-title="Luxe Leather" data-role="Role: Full-Stack Developer" data-tech="React|ASP.NET Core|MongoDB">
-            <p>A web-based e-commerce platform for a leather products business, offering an online marketplace for shoes, caps, purses, and other leather accessories with a modern, responsive storefront and scalable product and order management.</p>
+          <article
+            data-category="personal"
+            data-img="assets/luxe-leather.jpg"
+            data-year="2026"
+            data-domain="Luxury Fashion"
+            data-title="Luxe Leather"
+            data-role="Role: Full-Stack Developer"
+            data-tech="React|ASP.NET Core|MongoDB"
+            data-gallery="assets/Luxe-1.png|assets/Luxe-4.png|assets/Luxe-2.png|assets/Luxe-3.png|assets/Luxe-5.png"
+            data-gallery-labels="Storefront homepage|Cart experience|Register|Product detail|Checkout flow"
+            data-cover="assets/luxe-cover.jpg"
+            data-video="assets/Luxe-demo.mp4"
+            data-features="Collection browsing::Explore curated leather collections with a premium visual storefront|Product storytelling::Detailed product pages that highlight craftsmanship and materials|Cart & checkout::Complete shopping flow from cart through secure checkout|Customer accounts::User accounts for a personalised luxury shopping experience|Brand-ready UI::High-end interface designed for fashion and accessories brands"
+            data-github="https://github.com/Imesha599/Luxe_Leather"
+          >
+            <p>Luxe Leather is an e-commerce platform in the luxury fashion and accessories domain. It focuses on selling premium handcrafted leather products such as shoes, purses, and caps. The system covers the full online shopping flow — browsing collections, product details, cart, checkout, and user accounts — built for a high-end brand experience.</p>
           </article>
           <article data-category="personal" data-img="assets/agri-mart.jpg" data-year="2021" data-domain="Level 2 · Agri Tech" data-title="Agri Mart" data-role="Role: Registration, login, profile &amp; review management" data-tech="ReactJS|Spring Boot|MongoDB">
             <p>A web-based agricultural e-commerce marketplace connecting farmers directly with customers. Supports product discovery, competitive pricing, reliable delivery, and social media integration to expand farmers' market reach.</p>
@@ -606,6 +641,110 @@
       <a href="#top" id="back-to-top">Back to top ↑</a>
     </div>
   </footer>
+
+  <!-- Full-width project case study -->
+  <div class="case-study" id="case-study" hidden aria-hidden="true">
+    <div class="case-study__frame" role="dialog" aria-modal="true" aria-labelledby="case-title">
+      <header class="case-study__top">
+        <button type="button" class="case-study__back" data-case-close>
+          ← Back to projects
+        </button>
+        <button type="button" class="case-study__close" data-case-close aria-label="Close project details">×</button>
+      </header>
+
+      <div class="case-study__scroll" id="case-study-scroll">
+        <div class="case-study__inner">
+          <figure class="case-block case-hero case-cover case-reveal" id="case-hero-block">
+            <div class="case-hero__frame" id="case-hero-btn">
+              <img id="case-hero-img" src="" alt="" />
+              <div class="case-cover__veil" aria-hidden="true"></div>
+              <div class="case-cover__grain" aria-hidden="true"></div>
+              <div class="case-cover__content">
+                <p class="case-study__kicker" id="case-kicker"></p>
+                <h2 class="case-study__title" id="case-title"></h2>
+                <span class="case-cover__rule" aria-hidden="true"></span>
+              </div>
+            </div>
+          </figure>
+
+          <div class="case-block case-overview case-reveal" id="case-overview-block">
+            <div class="case-overview__main">
+              <section class="case-story" id="case-story-block" aria-labelledby="case-story-heading">
+                <h3 id="case-story-heading">Project story</h3>
+                <p id="case-story"></p>
+              </section>
+
+              <aside class="case-tech-panel case-tech-panel--inline" id="case-tech-col" aria-labelledby="case-tech-heading">
+                <div class="case-tech-panel__top">
+                  <span class="case-meta__eyebrow">Stack</span>
+                  <div>
+                    <h3 id="case-tech-heading">Technology</h3>
+                    <p class="case-meta__lead">Tools and frameworks used to build and ship the product.</p>
+                  </div>
+                </div>
+                <div class="case-tech" id="case-tech"></div>
+                <dl class="case-tech-panel__facts" id="case-tech-facts"></dl>
+              </aside>
+            </div>
+
+            <section class="case-video" id="case-video-block" hidden aria-labelledby="case-video-heading">
+              <div class="case-video__label">
+                <span class="case-video__badge">Project Walkthrough</span>
+                <h3 id="case-video-heading">See the product in motion</h3>
+              </div>
+              <div class="case-video__frame" id="case-video-frame">
+                <video id="case-video" playsinline preload="metadata" controlsList="nodownload" disablePictureInPicture></video>
+                <button type="button" class="case-video__play" id="case-video-play" aria-label="Play walkthrough">
+                  <span class="case-video__play-icon" aria-hidden="true">▶</span>
+                  <span>Play walkthrough</span>
+                </button>
+              </div>
+            </section>
+          </div>
+
+          <section class="case-block case-mosaic-wrap case-reveal" id="case-mosaic-block" aria-labelledby="case-mosaic-heading">
+            <div class="case-mosaic__head">
+              <h3 id="case-mosaic-heading">Interface gallery</h3>
+            </div>
+            <div class="case-mosaic" id="case-mosaic"></div>
+          </section>
+
+          <section class="case-block case-meta case-reveal" id="case-meta-block">
+            <header class="case-meta__head">
+              <span class="case-meta__eyebrow">Highlights</span>
+              <div>
+                <h3 id="case-features-heading">Key features</h3>
+                <p class="case-meta__lead">What this product delivers for users and the business.</p>
+              </div>
+            </header>
+
+            <div class="case-features" id="case-features" aria-labelledby="case-features-heading"></div>
+
+            <section class="case-github" id="case-github-block" hidden>
+              <div>
+                <h3>Source &amp; code</h3>
+                <p id="case-github-text">Browse the project repository on GitHub.</p>
+              </div>
+              <a class="btn btn--primary" id="case-github" href="#" target="_blank" rel="noopener noreferrer">View repository →</a>
+            </section>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full-screen image lightbox -->
+  <div class="lightbox" id="lightbox" hidden aria-hidden="true">
+    <div class="lightbox__backdrop" data-lightbox-close></div>
+    <button type="button" class="lightbox__close" data-lightbox-close aria-label="Close lightbox">×</button>
+    <button type="button" class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" aria-label="Previous image">←</button>
+    <figure class="lightbox__figure">
+      <img id="lightbox-img" src="" alt="" />
+      <figcaption id="lightbox-caption"></figcaption>
+      <p class="lightbox__counter" id="lightbox-counter">01 / 01</p>
+    </figure>
+    <button type="button" class="lightbox__nav lightbox__nav--next" id="lightbox-next" aria-label="Next image">→</button>
+  </div>
 
   <script src="script.js"></script>
 </body>
